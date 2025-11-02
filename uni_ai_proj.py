@@ -162,8 +162,7 @@ def main () -> None :
     [0, 0, 0, 0, 0, 9, 2, 0, 4, 0],  
     [0, 0, 0, 0, 0, 0, 0, 4, 0, 1],  
     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0] ]
-
-
+    
     label_maker(matrix)
 
     # print( tree_search('A' , 'G' , matrix) )
