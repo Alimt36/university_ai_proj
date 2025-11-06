@@ -1,0 +1,504 @@
+expand: 1 
+Expanded node:  state     : A 
+ action    : None 
+ path_cost : 0 
+ depth     : 0 
+
+ parent    : None 
+ ------------------
+
+expand: 2 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 1.0 
+ depth     : 1 
+
+ parent    : A 
+ ------------------
+
+expand: 3 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 2.0 
+ depth     : 2 
+
+ parent    : B 
+ ------------------
+
+expand: 4 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 3.0 
+ depth     : 1 
+
+ parent    : A 
+ ------------------
+
+expand: 5 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 3.0 
+ depth     : 2 
+
+ parent    : B 
+ ------------------
+
+expand: 6 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 3.0 
+ depth     : 3 
+
+ parent    : A 
+ ------------------
+
+expand: 7 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 4.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 8 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 5.0 
+ depth     : 3 
+
+ parent    : A 
+ ------------------
+
+expand: 9 
+Expanded node:  state     : I 
+ action    : move 
+ path_cost : 5.0 
+ depth     : 2 
+
+ parent    : D 
+ ------------------
+
+expand: 10 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 5.0 
+ depth     : 3 
+
+ parent    : F 
+ ------------------
+
+expand: 11 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 5.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 12 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 5.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 13 
+Expanded node:  state     : C 
+ action    : move 
+ path_cost : 6.0 
+ depth     : 1 
+
+ parent    : A 
+ ------------------
+
+expand: 14 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 6.0 
+ depth     : 2 
+
+ parent    : D 
+ ------------------
+
+expand: 15 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 6.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 16 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 6.0 
+ depth     : 6 
+
+ parent    : B 
+ ------------------
+
+expand: 17 
+Expanded node:  state     : E 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 2 
+
+ parent    : B 
+ ------------------
+
+expand: 18 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 19 
+Expanded node:  state     : I 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 4 
+
+ parent    : D 
+ ------------------
+
+expand: 20 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 3 
+
+ parent    : I 
+ ------------------
+
+expand: 21 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 22 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 5 
+
+ parent    : F 
+ ------------------
+
+expand: 23 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 6 
+
+ parent    : B 
+ ------------------
+
+expand: 24 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 3 
+
+ parent    : A 
+ ------------------
+
+expand: 25 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 26 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 7.0 
+ depth     : 7 
+
+ parent    : A 
+ ------------------
+
+expand: 27 
+Expanded node:  state     : C 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 3 
+
+ parent    : A 
+ ------------------
+
+expand: 28 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 4 
+
+ parent    : D 
+ ------------------
+
+expand: 29 
+Expanded node:  state     : G 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 2 
+
+ parent    : C 
+ ------------------
+
+expand: 30 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 6 
+
+ parent    : B 
+ ------------------
+
+expand: 31 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 32 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 6 
+
+ parent    : B 
+ ------------------
+
+expand: 33 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 8.0 
+ depth     : 8 
+
+ parent    : B 
+ ------------------
+
+expand: 34 
+Expanded node:  state     : E 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 35 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 3 
+
+ parent    : A 
+ ------------------
+
+expand: 36 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 37 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 7 
+
+ parent    : A 
+ ------------------
+
+expand: 38 
+Expanded node:  state     : I 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 6 
+
+ parent    : D 
+ ------------------
+
+expand: 39 
+Expanded node:  state     : D 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 5 
+
+ parent    : I 
+ ------------------
+
+expand: 40 
+Expanded node:  state     : I 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 4 
+
+ parent    : D 
+ ------------------
+
+expand: 41 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 5 
+
+ parent    : F 
+ ------------------
+
+expand: 42 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 6 
+
+ parent    : B 
+ ------------------
+
+expand: 43 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 7 
+
+ parent    : F 
+ ------------------
+
+expand: 44 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 4 
+
+ parent    : B 
+ ------------------
+
+expand: 45 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 6 
+
+ parent    : B 
+ ------------------
+
+expand: 46 
+Expanded node:  state     : F 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 8 
+
+ parent    : B 
+ ------------------
+
+expand: 47 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 48 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 7 
+
+ parent    : A 
+ ------------------
+
+expand: 49 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 50 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 7 
+
+ parent    : A 
+ ------------------
+
+expand: 51 
+Expanded node:  state     : B 
+ action    : move 
+ path_cost : 9.0 
+ depth     : 9 
+
+ parent    : A 
+ ------------------
+
+expand: 52 
+Expanded node:  state     : C 
+ action    : move 
+ path_cost : 10.0 
+ depth     : 5 
+
+ parent    : A 
+ ------------------
+
+expand: 53 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 10.0 
+ depth     : 6 
+
+ parent    : D 
+ ------------------
+
+expand: 54 
+Expanded node:  state     : A 
+ action    : move 
+ path_cost : 10.0 
+ depth     : 4 
+
+ parent    : D 
+ ------------------
+
+expand: 55 
+Expanded node:  state     : G 
+ action    : move 
+ path_cost : 10.0 
+ depth     : 4 
+
+ parent    : C 
+ ------------------
+
+expand: 56 
+Expanded node:  state     : C 
+ action    : move 
+ path_cost : 10.0 
+ depth     : 3 
+
+ parent    : G 
+ ------------------
+

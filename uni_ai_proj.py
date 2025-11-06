@@ -1,17 +1,23 @@
 
 import numpy as np
 import os
+import time as t
 #-------------------------------------------------------------------------------------------------------------------------------
-algo_type = ""
+
+#-------------------------------------------------------------------------------------------------------------------------------
+label = []
+already_expanded = []
+# global exp_index 
+exp_index = 1
+#-------------------------------------------------------------------------------------------------------------------------------
+
 #-------------------------------------------------------------------------------------------------------------------------------
 class Node :
-    def __init__ (self , state=None , action="move" , path_cost=0 , depth=None , x=-1 ,  parent=None ) -> None :
+    def __init__ (self , state=None , action="move" , path_cost=0 , depth=None ,  parent=None ) -> None :
         self.state = state
         self.action = action 
         self.path_cost = path_cost
         self.parent = parent
-        self.x =  x
-        # self.y =  y
 
         if self.parent != None :
         
@@ -44,7 +50,7 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
     for i in range (0 , len(adjncy_matrix)):
         if label[i] == initial_state:
             x = i
-    temp = Node(state=initial_state , action=None , x=x)
+    temp = Node(state=initial_state , action=None)
     fringe = np.array([temp])
 
     initial_itr = False
@@ -55,11 +61,15 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
         # else :
         #     print('1')
 
+        # if (fringe.size == 0 and initial_itr) :
+        #     return None
         if (fringe.size == 0 and initial_itr) :
-            return None
+            print("No path found.")
+            return None, ""
+
         else :
             initial_itr = True
-            node_in_action , fringe  = select_a_node( fringe , "ucs" )
+            node_in_action , fringe  = select_a_node( fringe , algo_type )
             already_expanded.append([node_in_action])
 
             if node_in_action.state == goal_state :
@@ -112,25 +122,45 @@ def solution( node ) ->  (Node , str):
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
+def node_row_finder( node:Node , matrix ) -> int :
+    for i in range (0 , len(matrix)):
+        if label[i] == node.state :
+            return i
+#-------------------------------------------------------------------------------------------------------------------------------
+        
+#-------------------------------------------------------------------------------------------------------------------------------
 def expand( node , matrix ) -> list :
     # i = 0
     # for i in range( 0 , len(matrix[0])):
     #     if node.state = 
     # print("?")
 
+    row_x = node_row_finder(node , matrix)
+
     temp = []
-    for i in range( 0 , len(matrix[node.x])):
-        if matrix[node.x][i] > 0 :
-            # if node.parent != None :
-            #     if label[i] != node.parent.state :
-                if label[i] not in already_expanded :
-                    temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[node.x][i]) , x=i , parent=node ))
+    # for i in range( 0 , len(matrix)):
+    #     if matrix[row_x][i] > 0 :
+    #         # if node.parent != None :
+    #         #     if label[i] != node.parent.state :
+    #             if label[i] not in already_expanded :
+    #                 temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+
+    for i in range( 0 , len(matrix)):
+        if matrix[row_x][i] > 0 :
+            temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+
+    global exp_index
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    log_path = os.path.join(base_dir, "expantion_list.txt")
+
+    with open(log_path, "a") as f:
+        f.write(f"expand count : {exp_index} \nexpanded node: {node.__str__()}\n")
+
+    exp_index += 1
 
     return temp
 #-------------------------------------------------------------------------------------------------------------------------------
-
-label = []
-already_expanded = []
 
 #-------------------------------------------------------------------------------------------------------------------------------
 def label_maker ( matrix ) -> None :
@@ -173,6 +203,7 @@ def main () -> None :
     # [0, 0, 0, 0, 0, 9, 2, 0, 4, 0],  
     # [0, 0, 0, 0, 0, 0, 0, 4, 0, 1],  
     # [0, 0, 0, 0, 0, 0, 0, 0, 1, 0] ]
+    # matrix = 
     
     matrix = matrix_extractor()
 
@@ -180,17 +211,26 @@ def main () -> None :
 
     # print( tree_search('A' , 'G' , matrix) )
 
+
     initial_state_ = str(input("input the initial_state :")).upper()
     # temp = chr(initial_state_)
     goal_state_ = str(input("input the goal_state :")).upper()
 
-    # algo_type = str("input type of the algorithm you want to use :").lower()
+    global algo_type 
+    algo_type = str(input("input type of the algorithm you want to use :")).lower()
 
+    initial_time = t.time()
     # node , path = tree_search('A' , 'J' , matrix)
     node , path = tree_search(initial_state_[0] , goal_state_[0] , matrix)
+    ending_time = t.time()
+
+    time_cost = ending_time - initial_time
 
     print(f"Path :\n" ,path)
     print(f"Path cost : {node.path_cost}")
+    print(f"Time needed : {time_cost:.6f} s")
 
 main()
 #-------------------------------------------------------------------------------------------------------------------------------
+
+
