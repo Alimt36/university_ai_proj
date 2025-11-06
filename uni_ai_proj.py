@@ -2,7 +2,7 @@
 import numpy as np
 import os
 #-------------------------------------------------------------------------------------------------------------------------------
-
+algo_type = ""
 #-------------------------------------------------------------------------------------------------------------------------------
 class Node :
     def __init__ (self , state=None , action="move" , path_cost=0 , depth=None , x=-1 ,  parent=None ) -> None :
@@ -105,7 +105,7 @@ def solution( node ) ->  (Node , str):
         if temp == "" :
             temp = node.state
         else :
-            temp = temp + " ---> " + node.state
+            temp = temp + " <--- " + node.state
         node = node.parent
 
     return  node_main , temp
@@ -129,9 +129,10 @@ def expand( node , matrix ) -> list :
     return temp
 #-------------------------------------------------------------------------------------------------------------------------------
 
-#-------------------------------------------------------------------------------------------------------------------------------
-already_expanded = []
 label = []
+already_expanded = []
+
+#-------------------------------------------------------------------------------------------------------------------------------
 def label_maker ( matrix ) -> None :
     lbl = 65
     for i in range(0 , len(matrix)):
@@ -178,7 +179,16 @@ def main () -> None :
     label_maker(matrix)
 
     # print( tree_search('A' , 'G' , matrix) )
-    node , path = tree_search('A' , 'J' , matrix)
+
+    initial_state_ = str(input("input the initial_state :")).upper()
+    # temp = chr(initial_state_)
+    goal_state_ = str(input("input the goal_state :")).upper()
+
+    # algo_type = str("input type of the algorithm you want to use :").lower()
+
+    # node , path = tree_search('A' , 'J' , matrix)
+    node , path = tree_search(initial_state_[0] , goal_state_[0] , matrix)
+
     print(f"Path :\n" ,path)
     print(f"Path cost : {node.path_cost}")
 
