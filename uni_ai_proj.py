@@ -142,14 +142,13 @@ def node_row_finder( node:Node , matrix ) -> int :
         
 #-------------------------------------------------------------------------------------------------------------------------------
 def expand( node , matrix ) -> list :
-    # i = 0
-    # for i in range( 0 , len(matrix[0])):
-    #     if node.state = 
-    # print("?")
 
     row_x = node_row_finder(node , matrix)
 
     temp = []
+
+    children_states = []
+
     # for i in range( 0 , len(matrix)):
     #     if matrix[row_x][i] > 0 :
     #         # if node.parent != None :
@@ -159,7 +158,10 @@ def expand( node , matrix ) -> list :
 
     for i in range( 0 , len(matrix)):
         if matrix[row_x][i] > 0 :
-            temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+            # temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+            temp_node = (Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+            temp.append(temp_node)
+            children_states.append(label[i])
 
     global exp_index
 
@@ -167,15 +169,9 @@ def expand( node , matrix ) -> list :
     log_path = os.path.join(base_dir, "expantion_list.txt")
 
     with open(log_path, "a") as f:
-        f.write(f"expand count : {exp_index} \nexpanded node: {node.__str__()}\n")
+        f.write(f"expand count : {exp_index} \nexpanded node: {node.__str__()}")
+        f.write(f"children: {children_states}\n")
     exp_index += 1
-
-    ## file for UI
-    # steps_log_path = os.path.join(base_dir, "steps_log.txt")
-    # with open(steps_log_path, "a", encoding="utf-8") as log:
-    #     children_states = [child.state for child in temp]
-    #     log.write(f"{node.state} -> {children_states}\n")
-
 
     return temp
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -194,141 +190,6 @@ def matrix_extractor() :
     file_path = os.path.join(base_dir, "matrix_holder.txt")
 
     return np.loadtxt(file_path, delimiter=",")
-#-------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-# # Ignore emoji/font warnings
-# warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
-
-# base_dir = os.path.dirname(os.path.abspath(__file__))
-# steps_log_path = os.path.join(base_dir, "steps_log.txt")
-# path_log_path = os.path.join(base_dir, "path_log.txt")
-
-# # --- Helper: parse the logged steps ---
-# def parse_steps(file_path):
-#     steps = []
-#     with open(file_path, "r", encoding="utf-8") as f:
-#         for line in f:
-#             if "->" in line:
-#                 parent, children_str = line.strip().split("->")
-#                 parent = parent.strip()
-#                 try:
-#                     children = eval(children_str.strip())
-#                 except Exception:
-#                     children = []
-#                 steps.append((parent, children))
-#     return steps
-
-# # --- Hierarchical layout (tree-like) ---
-# def hierarchy_pos(G, root=None, width=1.0, vert_gap=0.25, vert_loc=0, xcenter=0.5):
-#     """
-#     Recursively positions nodes in a hierarchy for NetworkX graphs.
-#     """
-#     if not nx.is_tree(G):
-#         raise TypeError("Cannot use hierarchy_pos on a graph that is not a tree")
-
-#     if root is None:
-#         if isinstance(G, nx.DiGraph):
-#             root = next(iter(nx.topological_sort(G)))
-#         else:
-#             root = list(G.nodes)[0]
-
-#     def _hierarchy_pos(G, root, left, right, vert_loc, vert_gap, pos=None, parent=None):
-#         if pos is None:
-#             pos = {root: (xcenter, vert_loc)}
-#         else:
-#             pos[root] = ((left + right) / 2, vert_loc)
-#         neighbors = list(G.successors(root))
-#         if neighbors:
-#             dx = (right - left) / len(neighbors)
-#             nextx = left
-#             for neighbor in neighbors:
-#                 nextx += dx
-#                 pos = _hierarchy_pos(G, neighbor, nextx - dx, nextx, vert_loc - vert_gap, vert_gap, pos, root)
-#         return pos
-
-#     return _hierarchy_pos(G, root, 0, width, vert_loc, vert_gap)
-
-# # --- Main animation ---
-# def animate_tree():
-#     steps = parse_steps(steps_log_path)
-#     if not steps:
-#         print("No steps found in log file.")
-#         return
-
-#     # Read the path (goal sequence)
-#     path = ""
-#     if os.path.exists(path_log_path):
-#         with open(path_log_path, "r", encoding="utf-8") as f:
-#             path = f.read().strip()
-
-#     goal_nodes = [x.strip() for x in path.split("<---") if x.strip()]
-
-#     G = nx.DiGraph()
-#     fig = plt.figure(figsize=(12, 6))
-#     gs = fig.add_gridspec(1, 2, width_ratios=[3, 2])
-
-#     ax_tree = fig.add_subplot(gs[0, 0])
-#     right_gs = gs[0, 1].subgridspec(2, 1)
-#     ax_current = fig.add_subplot(right_gs[0])
-#     ax_info = fig.add_subplot(right_gs[1])
-
-#     plt.tight_layout(pad=3)
-
-#     start_time = t.time()
-#     expanded_count = 0
-
-#     def update(frame):
-#         nonlocal expanded_count
-#         ax_tree.clear()
-#         ax_current.clear()
-#         ax_info.clear()
-
-#         parent, children = steps[frame]
-#         expanded_count += 1
-#         for child in children:
-#             G.add_edge(parent, child)
-
-#         # Hierarchical layout
-#         try:
-#             pos = hierarchy_pos(G, list(G.nodes)[0])
-#         except Exception:
-#             pos = nx.spring_layout(G)
-
-#         # Color goal node differently if found
-#         node_colors = []
-#         for n in G.nodes():
-#             if n in goal_nodes:
-#                 node_colors.append("lightgreen")
-#             elif n == parent:
-#                 node_colors.append("orange")
-#             else:
-#                 node_colors.append("skyblue")
-
-#         nx.draw(G, pos, with_labels=True, arrows=True, node_color=node_colors, ax=ax_tree)
-#         ax_tree.set_title("Tree Search Visualization")
-
-#         ax_current.text(0.5, 0.5, f"Currently Expanding:\n{parent}",
-#                         ha="center", va="center", fontsize=15, fontweight="bold")
-#         ax_current.axis("off")
-
-#         elapsed = t.time() - start_time
-#         goal_reached = parent in goal_nodes
-#         status = "✅ Goal Found!" if goal_reached else "⏳ Searching..."
-#         ax_info.text(0.5, 0.5,
-#                      f"Expanded Nodes: {expanded_count}\nTime: {elapsed:.2f}s\nStatus: {status}",
-#                      ha="center", va="center", fontsize=13)
-#         ax_info.axis("off")
-
-#         # Stop animation once goal reached
-#         if goal_reached:
-#             ani.event_source.stop()
-
-#     ani = animation.FuncAnimation(fig, update, frames=len(steps), interval=1200, repeat=False)
-#     plt.show()
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -406,5 +267,4 @@ def main () -> None :
 main()
 #-------------------------------------------------------------------------------------------------------------------------------
 
-
-
+#-------------------------------------------------------------------------------------------------------------------------------
