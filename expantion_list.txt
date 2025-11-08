@@ -1,5 +1,6 @@
 expand count : 1 
-expanded node:  state     : A 
+expanded node: 
+ state     : A 
  action    : None 
  path_cost : 0 
  depth     : 0 
@@ -7,8 +8,10 @@ expanded node:  state     : A
  parent    : None 
  ------------------
 children: ['B', 'C', 'D']
+
 expand count : 2 
-expanded node:  state     : B 
+expanded node: 
+ state     : B 
  action    : move 
  path_cost : 1.0 
  depth     : 1 
@@ -16,8 +19,10 @@ expanded node:  state     : B
  parent    : A 
  ------------------
 children: ['A', 'E', 'F']
+
 expand count : 3 
-expanded node:  state     : C 
+expanded node: 
+ state     : C 
  action    : move 
  path_cost : 6.0 
  depth     : 1 
@@ -25,8 +30,10 @@ expanded node:  state     : C
  parent    : A 
  ------------------
 children: ['A', 'G', 'H']
+
 expand count : 4 
-expanded node:  state     : D 
+expanded node: 
+ state     : D 
  action    : move 
  path_cost : 3.0 
  depth     : 1 
@@ -34,8 +41,10 @@ expanded node:  state     : D
  parent    : A 
  ------------------
 children: ['A', 'I']
+
 expand count : 5 
-expanded node:  state     : A 
+expanded node: 
+ state     : A 
  action    : move 
  path_cost : 2.0 
  depth     : 2 
@@ -43,8 +52,10 @@ expanded node:  state     : A
  parent    : B 
  ------------------
 children: ['B', 'C', 'D']
+
 expand count : 6 
-expanded node:  state     : E 
+expanded node: 
+ state     : E 
  action    : move 
  path_cost : 7.0 
  depth     : 2 
@@ -52,8 +63,10 @@ expanded node:  state     : E
  parent    : B 
  ------------------
 children: ['B', 'J']
+
 expand count : 7 
-expanded node:  state     : F 
+expanded node: 
+ state     : F 
  action    : move 
  path_cost : 3.0 
  depth     : 2 
@@ -61,8 +74,10 @@ expanded node:  state     : F
  parent    : B 
  ------------------
 children: ['B']
+
 expand count : 8 
-expanded node:  state     : A 
+expanded node: 
+ state     : A 
  action    : move 
  path_cost : 12.0 
  depth     : 2 
@@ -70,8 +85,10 @@ expanded node:  state     : A
  parent    : C 
  ------------------
 children: ['B', 'C', 'D']
+
 expand count : 9 
-expanded node:  state     : G 
+expanded node: 
+ state     : G 
  action    : move 
  path_cost : 8.0 
  depth     : 2 
@@ -79,8 +96,10 @@ expanded node:  state     : G
  parent    : C 
  ------------------
 children: ['C', 'H', 'K']
+
 expand count : 10 
-expanded node:  state     : H 
+expanded node: 
+ state     : H 
  action    : move 
  path_cost : 13.0 
  depth     : 2 
@@ -88,8 +107,10 @@ expanded node:  state     : H
  parent    : C 
  ------------------
 children: ['C', 'G', 'L']
+
 expand count : 11 
-expanded node:  state     : A 
+expanded node: 
+ state     : A 
  action    : move 
  path_cost : 6.0 
  depth     : 2 
@@ -97,8 +118,10 @@ expanded node:  state     : A
  parent    : D 
  ------------------
 children: ['B', 'C', 'D']
+
 expand count : 12 
-expanded node:  state     : I 
+expanded node: 
+ state     : I 
  action    : move 
  path_cost : 5.0 
  depth     : 2 
@@ -106,8 +129,10 @@ expanded node:  state     : I
  parent    : D 
  ------------------
 children: ['D']
+
 expand count : 13 
-expanded node:  state     : B 
+expanded node: 
+ state     : B 
  action    : move 
  path_cost : 3.0 
  depth     : 3 
@@ -115,8 +140,10 @@ expanded node:  state     : B
  parent    : A 
  ------------------
 children: ['A', 'E', 'F']
+
 expand count : 14 
-expanded node:  state     : C 
+expanded node: 
+ state     : C 
  action    : move 
  path_cost : 8.0 
  depth     : 3 
@@ -124,8 +151,10 @@ expanded node:  state     : C
  parent    : A 
  ------------------
 children: ['A', 'G', 'H']
+
 expand count : 15 
-expanded node:  state     : D 
+expanded node: 
+ state     : D 
  action    : move 
  path_cost : 5.0 
  depth     : 3 
@@ -133,8 +162,10 @@ expanded node:  state     : D
  parent    : A 
  ------------------
 children: ['A', 'I']
+
 expand count : 16 
-expanded node:  state     : B 
+expanded node: 
+ state     : B 
  action    : move 
  path_cost : 13.0 
  depth     : 3 
@@ -142,8 +173,10 @@ expanded node:  state     : B
  parent    : E 
  ------------------
 children: ['A', 'E', 'F']
+
 expand count : 17 
-expanded node:  state     : J 
+expanded node: 
+ state     : J 
  action    : move 
  path_cost : 12.0 
  depth     : 3 
@@ -151,8 +184,10 @@ expanded node:  state     : J
  parent    : E 
  ------------------
 children: ['E']
+
 expand count : 18 
-expanded node:  state     : B 
+expanded node: 
+ state     : B 
  action    : move 
  path_cost : 5.0 
  depth     : 3 
@@ -160,8 +195,10 @@ expanded node:  state     : B
  parent    : F 
  ------------------
 children: ['A', 'E', 'F']
+
 expand count : 19 
-expanded node:  state     : B 
+expanded node: 
+ state     : B 
  action    : move 
  path_cost : 13.0 
  depth     : 3 
@@ -169,8 +206,10 @@ expanded node:  state     : B
  parent    : A 
  ------------------
 children: ['A', 'E', 'F']
+
 expand count : 20 
-expanded node:  state     : C 
+expanded node: 
+ state     : C 
  action    : move 
  path_cost : 18.0 
  depth     : 3 
@@ -178,8 +217,10 @@ expanded node:  state     : C
  parent    : A 
  ------------------
 children: ['A', 'G', 'H']
+
 expand count : 21 
-expanded node:  state     : D 
+expanded node: 
+ state     : D 
  action    : move 
  path_cost : 15.0 
  depth     : 3 
@@ -187,8 +228,10 @@ expanded node:  state     : D
  parent    : A 
  ------------------
 children: ['A', 'I']
+
 expand count : 22 
-expanded node:  state     : C 
+expanded node: 
+ state     : C 
  action    : move 
  path_cost : 10.0 
  depth     : 3 
@@ -196,8 +239,10 @@ expanded node:  state     : C
  parent    : G 
  ------------------
 children: ['A', 'G', 'H']
+
 expand count : 23 
-expanded node:  state     : H 
+expanded node: 
+ state     : H 
  action    : move 
  path_cost : 13.0 
  depth     : 3 
@@ -205,3 +250,4 @@ expanded node:  state     : H
  parent    : G 
  ------------------
 children: ['C', 'G', 'L']
+

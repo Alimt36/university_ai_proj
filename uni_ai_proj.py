@@ -169,8 +169,8 @@ def expand( node , matrix ) -> list :
     log_path = os.path.join(base_dir, "expantion_list.txt")
 
     with open(log_path, "a") as f:
-        f.write(f"expand count : {exp_index} \nexpanded node: {node.__str__()}")
-        f.write(f"children: {children_states}\n")
+        f.write(f"expand count : {exp_index} \nexpanded node: \n{node.__str__()}")
+        f.write(f"children: {children_states}\n\n")
     exp_index += 1
 
     return temp
