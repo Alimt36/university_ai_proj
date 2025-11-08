@@ -2,9 +2,13 @@
 import numpy as np
 import os
 import time as t
+import warnings
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import networkx as nx
+import re
 
 import subprocess
-
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -164,14 +168,14 @@ def expand( node , matrix ) -> list :
 
     with open(log_path, "a") as f:
         f.write(f"expand count : {exp_index} \nexpanded node: {node.__str__()}\n")
+    exp_index += 1
 
     ## file for UI
-    steps_log_path = os.path.join(base_dir, "steps_log.txt")
-    with open(steps_log_path, "a", encoding="utf-8") as log:
-        children_states = [child.state for child in temp]
-        log.write(f"{node.state} -> {children_states}\n")
+    # steps_log_path = os.path.join(base_dir, "steps_log.txt")
+    # with open(steps_log_path, "a", encoding="utf-8") as log:
+    #     children_states = [child.state for child in temp]
+    #     log.write(f"{node.state} -> {children_states}\n")
 
-    exp_index += 1
 
     return temp
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -190,6 +194,141 @@ def matrix_extractor() :
     file_path = os.path.join(base_dir, "matrix_holder.txt")
 
     return np.loadtxt(file_path, delimiter=",")
+#-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+# # Ignore emoji/font warnings
+# warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
+
+# base_dir = os.path.dirname(os.path.abspath(__file__))
+# steps_log_path = os.path.join(base_dir, "steps_log.txt")
+# path_log_path = os.path.join(base_dir, "path_log.txt")
+
+# # --- Helper: parse the logged steps ---
+# def parse_steps(file_path):
+#     steps = []
+#     with open(file_path, "r", encoding="utf-8") as f:
+#         for line in f:
+#             if "->" in line:
+#                 parent, children_str = line.strip().split("->")
+#                 parent = parent.strip()
+#                 try:
+#                     children = eval(children_str.strip())
+#                 except Exception:
+#                     children = []
+#                 steps.append((parent, children))
+#     return steps
+
+# # --- Hierarchical layout (tree-like) ---
+# def hierarchy_pos(G, root=None, width=1.0, vert_gap=0.25, vert_loc=0, xcenter=0.5):
+#     """
+#     Recursively positions nodes in a hierarchy for NetworkX graphs.
+#     """
+#     if not nx.is_tree(G):
+#         raise TypeError("Cannot use hierarchy_pos on a graph that is not a tree")
+
+#     if root is None:
+#         if isinstance(G, nx.DiGraph):
+#             root = next(iter(nx.topological_sort(G)))
+#         else:
+#             root = list(G.nodes)[0]
+
+#     def _hierarchy_pos(G, root, left, right, vert_loc, vert_gap, pos=None, parent=None):
+#         if pos is None:
+#             pos = {root: (xcenter, vert_loc)}
+#         else:
+#             pos[root] = ((left + right) / 2, vert_loc)
+#         neighbors = list(G.successors(root))
+#         if neighbors:
+#             dx = (right - left) / len(neighbors)
+#             nextx = left
+#             for neighbor in neighbors:
+#                 nextx += dx
+#                 pos = _hierarchy_pos(G, neighbor, nextx - dx, nextx, vert_loc - vert_gap, vert_gap, pos, root)
+#         return pos
+
+#     return _hierarchy_pos(G, root, 0, width, vert_loc, vert_gap)
+
+# # --- Main animation ---
+# def animate_tree():
+#     steps = parse_steps(steps_log_path)
+#     if not steps:
+#         print("No steps found in log file.")
+#         return
+
+#     # Read the path (goal sequence)
+#     path = ""
+#     if os.path.exists(path_log_path):
+#         with open(path_log_path, "r", encoding="utf-8") as f:
+#             path = f.read().strip()
+
+#     goal_nodes = [x.strip() for x in path.split("<---") if x.strip()]
+
+#     G = nx.DiGraph()
+#     fig = plt.figure(figsize=(12, 6))
+#     gs = fig.add_gridspec(1, 2, width_ratios=[3, 2])
+
+#     ax_tree = fig.add_subplot(gs[0, 0])
+#     right_gs = gs[0, 1].subgridspec(2, 1)
+#     ax_current = fig.add_subplot(right_gs[0])
+#     ax_info = fig.add_subplot(right_gs[1])
+
+#     plt.tight_layout(pad=3)
+
+#     start_time = t.time()
+#     expanded_count = 0
+
+#     def update(frame):
+#         nonlocal expanded_count
+#         ax_tree.clear()
+#         ax_current.clear()
+#         ax_info.clear()
+
+#         parent, children = steps[frame]
+#         expanded_count += 1
+#         for child in children:
+#             G.add_edge(parent, child)
+
+#         # Hierarchical layout
+#         try:
+#             pos = hierarchy_pos(G, list(G.nodes)[0])
+#         except Exception:
+#             pos = nx.spring_layout(G)
+
+#         # Color goal node differently if found
+#         node_colors = []
+#         for n in G.nodes():
+#             if n in goal_nodes:
+#                 node_colors.append("lightgreen")
+#             elif n == parent:
+#                 node_colors.append("orange")
+#             else:
+#                 node_colors.append("skyblue")
+
+#         nx.draw(G, pos, with_labels=True, arrows=True, node_color=node_colors, ax=ax_tree)
+#         ax_tree.set_title("Tree Search Visualization")
+
+#         ax_current.text(0.5, 0.5, f"Currently Expanding:\n{parent}",
+#                         ha="center", va="center", fontsize=15, fontweight="bold")
+#         ax_current.axis("off")
+
+#         elapsed = t.time() - start_time
+#         goal_reached = parent in goal_nodes
+#         status = "✅ Goal Found!" if goal_reached else "⏳ Searching..."
+#         ax_info.text(0.5, 0.5,
+#                      f"Expanded Nodes: {expanded_count}\nTime: {elapsed:.2f}s\nStatus: {status}",
+#                      ha="center", va="center", fontsize=13)
+#         ax_info.axis("off")
+
+#         # Stop animation once goal reached
+#         if goal_reached:
+#             ani.event_source.stop()
+
+#     ani = animation.FuncAnimation(fig, update, frames=len(steps), interval=1200, repeat=False)
+#     plt.show()
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -233,6 +372,22 @@ def main () -> None :
     global algo_type 
     algo_type = str(input("input type of the algorithm you want to use :")).lower()
 
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    files_to_clear = [
+        os.path.join(base_dir, "expantion_list.txt"),
+        os.path.join(base_dir, "path_log.txt"),
+        os.path.join(base_dir, "steps_log.txt")
+    ]
+    
+    for file_path in files_to_clear:
+        try:
+            with open(file_path, "w") as f:
+                f.write("")  # Clear the file
+            print(f"Cleared: {os.path.basename(file_path)}")
+        except Exception as e:
+            print(f"Could not clear {os.path.basename(file_path)}: {e}")
+
     initial_time = t.time()
     # node , path = tree_search('A' , 'J' , matrix)
     node , path = tree_search(initial_state_[0] , goal_state_[0] , matrix)
@@ -244,16 +399,12 @@ def main () -> None :
     print(f"Path cost : {node.path_cost}")
     print(f"Time needed : {time_cost:.6f} s")
 
-    ###ui
-    print("\nStarting tree animation ... 🌳")
-    subprocess.run(["python", "tree_animator.py"])
-
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    path_file = os.path.join(base_dir, "path_log.txt")
-    with open(path_file, "w", encoding="utf-8") as f:
-        f.write(path)
+    animate_file = os.path.join(base_dir, "animate.py")
+    subprocess.run(["python", animate_file], check=True)
+    # animate()
 
 main()
 #-------------------------------------------------------------------------------------------------------------------------------
+
 
 
