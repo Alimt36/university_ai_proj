@@ -2,6 +2,9 @@
 import numpy as np
 import os
 import time as t
+
+import subprocess
+
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +73,8 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
         else :
             initial_itr = True
             node_in_action , fringe  = select_a_node( fringe , algo_type )
-            already_expanded.append([node_in_action])
+            # already_expanded.append([node_in_action])
+            already_expanded.append(node_in_action.state)
 
             if node_in_action.state == goal_state :
                 return solution(node_in_action)
@@ -97,7 +101,11 @@ def select_a_node( fringe , type="ucs" ) :
         return min_ucs_obj , fringe
     
     elif type == "bfs":
-        return
+        bfs_obj = fringe[0]
+        fringe = np.delete(fringe, 0) 
+       
+        return bfs_obj, fringe
+    
     elif type == "dfs":
         return
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -156,6 +164,12 @@ def expand( node , matrix ) -> list :
 
     with open(log_path, "a") as f:
         f.write(f"expand count : {exp_index} \nexpanded node: {node.__str__()}\n")
+
+    ## file for UI
+    steps_log_path = os.path.join(base_dir, "steps_log.txt")
+    with open(steps_log_path, "a", encoding="utf-8") as log:
+        children_states = [child.state for child in temp]
+        log.write(f"{node.state} -> {children_states}\n")
 
     exp_index += 1
 
@@ -229,6 +243,15 @@ def main () -> None :
     print(f"Path :\n" ,path)
     print(f"Path cost : {node.path_cost}")
     print(f"Time needed : {time_cost:.6f} s")
+
+    ###ui
+    print("\nStarting tree animation ... 🌳")
+    subprocess.run(["python", "tree_animator.py"])
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    path_file = os.path.join(base_dir, "path_log.txt")
+    with open(path_file, "w", encoding="utf-8") as f:
+        f.write(path)
 
 main()
 #-------------------------------------------------------------------------------------------------------------------------------
