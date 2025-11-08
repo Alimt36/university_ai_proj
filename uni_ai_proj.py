@@ -259,7 +259,7 @@ def main () -> None :
     print(f"Path :\n" ,path)
     print(f"Path cost : {node.path_cost}")
     print(f"Time needed : {time_cost:.6f} s")
-
+    
     animate_file = os.path.join(base_dir, "animate.py")
     subprocess.run(["python", animate_file], check=True)
     # animate()
