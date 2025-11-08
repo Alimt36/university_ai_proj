@@ -16,6 +16,7 @@ label = []
 already_expanded = []
 # global exp_index 
 exp_index = 1
+path = ""
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -89,21 +90,22 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
 #-------------------------------------------------------------------------------------------------------------------------------
 def select_a_node( fringe , type="ucs" ) :
     if type == "ucs":
-        min_ucs = fringe[0].path_cost
-        min_index = 0
-        # min_ucs_obj = None
-        min_ucs_obj = fringe[0]
-        # i = 0
-        for i in range(1 , fringe.size):
-            if fringe[i].path_cost < min_ucs :
-                min_ucs = fringe[i].path_cost
-                min_ucs_obj = fringe[i]
-                min_index = i
+        return
+    #     min_ucs = fringe[0].path_cost
+    #     min_index = 0
+    #     # min_ucs_obj = None
+    #     min_ucs_obj = fringe[0]
+    #     # i = 0
+    #     for i in range(1 , fringe.size):
+    #         if fringe[i].path_cost < min_ucs :
+    #             min_ucs = fringe[i].path_cost
+    #             min_ucs_obj = fringe[i]
+    #             min_index = i
 
-        fringe = np.delete(fringe , min_index)
+    #     fringe = np.delete(fringe , min_index)
 
-        return min_ucs_obj , fringe
-    
+    #     return min_ucs_obj , fringe
+        
     elif type == "bfs":
         bfs_obj = fringe[0]
         fringe = np.delete(fringe, 0) 
@@ -115,7 +117,7 @@ def select_a_node( fringe , type="ucs" ) :
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
-def solution( node ) ->  (Node , str):
+def solution( node ) ->  (Node , str): # type: ignore
     # print("?")
     node_main = node
     temp = ""
@@ -154,7 +156,10 @@ def expand( node , matrix ) -> list :
     #         # if node.parent != None :
     #         #     if label[i] != node.parent.state :
     #             if label[i] not in already_expanded :
-    #                 temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+    #                 # temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+    #                 temp_node = (Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+    #                 temp.append(temp_node)
+    #                 children_states.append(label[i])
 
     for i in range( 0 , len(matrix)):
         if matrix[row_x][i] > 0 :
@@ -230,6 +235,7 @@ def main () -> None :
     # temp = chr(initial_state_)
     goal_state_ = str(input("input the goal_state :")).upper()
 
+    global path
     global algo_type 
     algo_type = str(input("input type of the algorithm you want to use :")).lower()
 
@@ -238,16 +244,13 @@ def main () -> None :
     files_to_clear = [
         os.path.join(base_dir, "expantion_list.txt"),
         os.path.join(base_dir, "path_log.txt"),
-        os.path.join(base_dir, "steps_log.txt")
     ]
     
     for file_path in files_to_clear:
-        try:
-            with open(file_path, "w") as f:
-                f.write("")  # Clear the file
-            print(f"Cleared: {os.path.basename(file_path)}")
-        except Exception as e:
-            print(f"Could not clear {os.path.basename(file_path)}: {e}")
+        with open(file_path, "w") as f:
+            f.write("")
+
+
 
     initial_time = t.time()
     # node , path = tree_search('A' , 'J' , matrix)
@@ -256,10 +259,14 @@ def main () -> None :
 
     time_cost = ending_time - initial_time
 
+    file_path = os.path.join(base_dir, "path_log.txt")
+    with open(file_path, "w") as f:
+            f.write(path)
+
     print(f"Path :\n" ,path)
     print(f"Path cost : {node.path_cost}")
     print(f"Time needed : {time_cost:.6f} s")
-    
+
     animate_file = os.path.join(base_dir, "animate.py")
     subprocess.run(["python", animate_file], check=True)
     # animate()
