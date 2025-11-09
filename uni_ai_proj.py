@@ -151,22 +151,22 @@ def expand( node , matrix ) -> list :
 
     children_states = []
 
-    # for i in range( 0 , len(matrix)):
-    #     if matrix[row_x][i] > 0 :
-    #         # if node.parent != None :
-    #         #     if label[i] != node.parent.state :
-    #             if label[i] not in already_expanded :
-    #                 # temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
-    #                 temp_node = (Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
-    #                 temp.append(temp_node)
-    #                 children_states.append(label[i])
-
     for i in range( 0 , len(matrix)):
         if matrix[row_x][i] > 0 :
-            # temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
-            temp_node = (Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
-            temp.append(temp_node)
-            children_states.append(label[i])
+            # if node.parent != None :
+            #     if label[i] != node.parent.state :
+                if label[i] not in already_expanded :
+                    # temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+                    temp_node = (Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+                    temp.append(temp_node)
+                    children_states.append(label[i])
+
+    # for i in range( 0 , len(matrix)):
+    #     if matrix[row_x][i] > 0 :
+    #         # temp.append(Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+    #         temp_node = (Node( state=label[i] , path_cost=float(node.path_cost+matrix[row_x][i]) , parent=node ))
+    #         temp.append(temp_node)
+    #         children_states.append(label[i])
 
     global exp_index
 
