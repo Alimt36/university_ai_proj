@@ -232,16 +232,32 @@ def main () -> None :
     # print( tree_search('A' , 'G' , matrix) )
 
 
-    initial_state_ = str(input("input the initial_state :")).upper()
-    # temp = chr(initial_state_)
-    goal_state_ = str(input("input the goal_state :")).upper()
+    # initial_state_ = str(input("input the initial_state :")).upper()
+    # # temp = chr(initial_state_)
+    # goal_state_ = str(input("input the goal_state :")).upper()
 
     # initial_state_ = str(input("input the initial_state :"))
     # # temp = chr(initial_state_)
     # goal_state_ = str(input("input the goal_state :"))
 
+
+    from input_form import get_states
+
+    user_input = get_states()
+    if user_input is None:
+        print("Cancelled by user.")
+        return
+    initial_state_, goal_state_ = user_input
+    initial_state_= initial_state_.upper()
+    goal_state_ =goal_state_.upper()
+
+
+
+    if initial_state_  not in label or goal_state_ not in label : 
+          print("Initial state or goal state is not defined in the adjacency matrix!!")
+
     global path
-    global algo_type 
+    global algo_type    
     # algo_type = str(input("input type of the algorithm you want to use :")).lower()
     algo_type = "bfs"
 
