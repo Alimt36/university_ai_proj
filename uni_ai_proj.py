@@ -187,6 +187,7 @@ def label_maker ( matrix ) -> None :
     for i in range(0 , len(matrix)):
         label.append(chr(lbl))
         lbl = lbl+1
+
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -235,9 +236,14 @@ def main () -> None :
     # temp = chr(initial_state_)
     goal_state_ = str(input("input the goal_state :")).upper()
 
+    # initial_state_ = str(input("input the initial_state :"))
+    # # temp = chr(initial_state_)
+    # goal_state_ = str(input("input the goal_state :"))
+
     global path
     global algo_type 
-    algo_type = str(input("input type of the algorithm you want to use :")).lower()
+    # algo_type = str(input("input type of the algorithm you want to use :")).lower()
+    algo_type = "bfs"
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
@@ -254,7 +260,7 @@ def main () -> None :
 
     initial_time = t.time()
     # node , path = tree_search('A' , 'J' , matrix)
-    node , path = tree_search(initial_state_[0] , goal_state_[0] , matrix)
+    node , path = tree_search(initial_state_ , goal_state_ , matrix)
     ending_time = t.time()
 
     time_cost = ending_time - initial_time
@@ -263,8 +269,9 @@ def main () -> None :
     with open(file_path, "w") as f:
             f.write(path)
 
-    print(f"Path :\n" ,path)
-    print(f"Path cost : {node.path_cost}")
+    if node != None : 
+        print(f"Path :\n" ,path)
+        print(f"Path cost : {node.path_cost}")
     print(f"Time needed : {time_cost:.6f} s")
 
     animate_file = os.path.join(base_dir, "animate.py")
@@ -275,3 +282,5 @@ main()
 #-------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------------------------------------------------------
+
+
