@@ -1,143 +1,110 @@
 expand count : 1 
 expanded node: 
- state     : L 
+ state     : A 
  action    : None 
  path_cost : 0 
  depth     : 0 
 
  parent    : None 
  ------------------
-children: ['H', 'K']
+children: ['B']
 
 expand count : 2 
 expanded node: 
- state     : H 
+ state     : B 
  action    : move 
- path_cost : 1.0 
+ path_cost : 2.0 
  depth     : 1 
 
- parent    : L 
+ parent    : A 
  ------------------
-children: ['C', 'G']
+children: ['C', 'D']
 
 expand count : 3 
 expanded node: 
- state     : K 
+ state     : D 
  action    : move 
- path_cost : 1.0 
- depth     : 1 
+ path_cost : 3.0 
+ depth     : 2 
 
- parent    : L 
+ parent    : B 
  ------------------
-children: ['G']
+children: ['E', 'F']
 
 expand count : 4 
 expanded node: 
  state     : C 
  action    : move 
- path_cost : 8.0 
+ path_cost : 5.0 
  depth     : 2 
 
- parent    : H 
+ parent    : B 
  ------------------
-children: ['A', 'G']
+children: ['E']
 
 expand count : 5 
 expanded node: 
- state     : G 
+ state     : E 
  action    : move 
- path_cost : 6.0 
- depth     : 2 
+ path_cost : 5.0 
+ depth     : 3 
 
- parent    : H 
+ parent    : D 
  ------------------
-children: []
+children: ['G']
 
 expand count : 6 
 expanded node: 
- state     : G 
+ state     : F 
  action    : move 
- path_cost : 3.0 
- depth     : 2 
+ path_cost : 6.0 
+ depth     : 3 
 
- parent    : K 
+ parent    : D 
  ------------------
-children: []
+children: ['H']
 
 expand count : 7 
 expanded node: 
- state     : A 
+ state     : H 
  action    : move 
- path_cost : 14.0 
+ path_cost : 8.0 
+ depth     : 4 
+
+ parent    : F 
+ ------------------
+children: ['I', 'J']
+
+expand count : 8 
+expanded node: 
+ state     : E 
+ action    : move 
+ path_cost : 9.0 
  depth     : 3 
 
  parent    : C 
  ------------------
-children: ['B', 'D']
+children: ['G']
 
-expand count : 8 
+expand count : 9 
 expanded node: 
  state     : G 
  action    : move 
  path_cost : 10.0 
- depth     : 3 
-
- parent    : C 
- ------------------
-children: []
-
-expand count : 9 
-expanded node: 
- state     : B 
- action    : move 
- path_cost : 15.0 
  depth     : 4 
 
- parent    : A 
- ------------------
-children: ['E', 'F']
-
-expand count : 10 
-expanded node: 
- state     : D 
- action    : move 
- path_cost : 17.0 
- depth     : 4 
-
- parent    : A 
+ parent    : E 
  ------------------
 children: ['I']
 
-expand count : 11 
-expanded node: 
- state     : E 
- action    : move 
- path_cost : 21.0 
- depth     : 5 
-
- parent    : B 
- ------------------
-children: ['J']
-
-expand count : 12 
-expanded node: 
- state     : F 
- action    : move 
- path_cost : 17.0 
- depth     : 5 
-
- parent    : B 
- ------------------
-children: []
-
-expand count : 13 
+expand count : 10 
 expanded node: 
  state     : I 
  action    : move 
- path_cost : 19.0 
+ path_cost : 11.0 
  depth     : 5 
 
- parent    : D 
+ parent    : H 
  ------------------
-children: []
+children: ['J']
 
