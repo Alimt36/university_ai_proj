@@ -54,10 +54,10 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
     # temp = [initial_state , fringe] 
     # fringe = np.array(temp)
     # fringe = np.array([initial_state])
-    x = 0
-    for i in range (0 , len(adjncy_matrix)):
-        if label[i] == initial_state:
-            x = i
+    # x = 0
+    # for i in range (0 , len(adjncy_matrix)):
+    #     if label[i] == initial_state:
+    #         x = i
     temp = Node(state=initial_state , action=None)
     fringe = np.array([temp])
 
@@ -77,6 +77,7 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
 
         else :
             initial_itr = True
+            
             node_in_action , fringe  = select_a_node( fringe , algo_type )
             # already_expanded.append([node_in_action])
             already_expanded.append(node_in_action.state)
@@ -90,21 +91,21 @@ def tree_search ( initial_state , goal_state , adjncy_matrix , fringe=None  ) ->
 #-------------------------------------------------------------------------------------------------------------------------------
 def select_a_node( fringe , type="ucs" ) :
     if type == "ucs":
-        return
-    #     min_ucs = fringe[0].path_cost
-    #     min_index = 0
-    #     # min_ucs_obj = None
-    #     min_ucs_obj = fringe[0]
-    #     # i = 0
-    #     for i in range(1 , fringe.size):
-    #         if fringe[i].path_cost < min_ucs :
-    #             min_ucs = fringe[i].path_cost
-    #             min_ucs_obj = fringe[i]
-    #             min_index = i
+        # return
+        min_ucs = fringe[0].path_cost
+        min_index = 0
+        # min_ucs_obj = None
+        min_ucs_obj = fringe[0]
+        # i = 0
+        for i in range(1 , fringe.size):
+            if fringe[i].path_cost < min_ucs :
+                min_ucs = fringe[i].path_cost
+                min_ucs_obj = fringe[i]
+                min_index = i
 
-    #     fringe = np.delete(fringe , min_index)
+        fringe = np.delete(fringe , min_index)
 
-    #     return min_ucs_obj , fringe
+        return min_ucs_obj , fringe
         
     elif type == "bfs":
         bfs_obj = fringe[0]
